@@ -29,11 +29,15 @@ public class HelloController {
 		return "index";
 	}
 
-	@GetMapping("/cars")
-	public String printDemandedCars(@RequestParam(value = "count", required = false) Integer count, Model model) {
-		model.addAttribute("cars", carDAO.index());
+	@GetMapping(value = "/cars")
+	public String getCarTable(@RequestParam(value = "count", defaultValue = "5",
+			required = false) Integer count, Model model) {
+
+		model.addAttribute("cars", carDAO.getCountCars(count));
+
 		return "cars";
 	}
+
 
 	@GetMapping("/{id}")
 	public String showCar(@PathVariable("id") int id, Model model) {

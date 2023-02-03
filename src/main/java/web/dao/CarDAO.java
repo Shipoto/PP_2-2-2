@@ -5,6 +5,7 @@ import web.models.Car;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class CarDAO {
@@ -27,6 +28,11 @@ public class CarDAO {
     public void save(Car car) {
         car.setId(++PC);
         cars.add(car);
+    }
+
+
+    public List<Car> getCountCars(int count) {
+        return cars.stream().limit(count).collect(Collectors.toList());
     }
 
     public Car show(int id) {
